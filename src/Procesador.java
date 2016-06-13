@@ -1,49 +1,20 @@
 
-import java.util.*;
-
-/**
- * 
- */
 public class Procesador {
 
-	/**
-	 * Default constructor
-	 */
-	public Procesador() {
-	}
+    public Procesador() {
+    }
 
-	/**
-	 * 
-	 */
-	public static int PC;
+    public static int PC;
+    public int AC;
+    public int IR;
 
-	/**
-	 * 
-	 */
-	public int AC;
+    public void ejecutarUnSegundoDeProceso(DTO objDTO) {
+        // TODO implement here
+    }
 
-	/**
-	 * 
-	 */
-	public int IR;
-
-
-	/**
-	 * @param objDTO 
-	 * @return
-	 */
-	public void ejecutarUnSegundoDeProceso(DTO objDTO) {
-		// TODO implement here
-		return null;
-	}
-
-	/**
-	 * @param objDTO 
-	 * @return
-	 */
-	public DTO EstadoActual(DTO objDTO) {
-		// TODO implement here
-		return null;
-	}
+    public DTO EstadoActual(DTO objDTO) {
+        // TODO implement here
+        return null;
+    }
 
 }
