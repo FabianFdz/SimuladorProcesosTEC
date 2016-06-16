@@ -1,7 +1,6 @@
 import java.util.*;
 
 public class Proceso {
-
     public String nombreProceso;
     public double tiempoEjecucion = 0;
     public double tamanhoBits = 0;

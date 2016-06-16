@@ -9,7 +9,11 @@ public class Instruccion {
     public Instruccion(String operacion, String nombre) {
         this.operacion = operacion;
         this.nombre = nombre;
-    }        
+    }
+
+    public Instruccion(String operacion) {
+        this.operacion = operacion;
+    }
 
     public String operacion;
     public String nombre;
