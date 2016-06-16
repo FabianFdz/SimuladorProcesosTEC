@@ -4,11 +4,7 @@ import java.util.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-
 public class Principal {
-
-    public Principal() {
-    }
 
     public static int cantProcesadores;
     public Set<Proceso> listaProcesos;
@@ -16,7 +12,7 @@ public class Principal {
     
     public static Document abrirArchivo(){
         try{
-            org.jsoup.nodes.Document doc = Jsoup.parse( new File("C:/Users/Esteban/Documents/GitHub/SimuladorProcesosTEC/archivo.xml") , "utf-8" );
+            org.jsoup.nodes.Document doc = Jsoup.parse( new File("..//archivo.xml") , "utf-8" );
             return doc;
         } 
         catch (IOException e){
@@ -31,20 +27,19 @@ public class Principal {
         
         while(i < numProc){
             Procesador proc = new Procesador();
-            objDTO.listaProcesadores.add(proc);
+            DTO.objDTO.listaProcesadores.add(proc);
             i++;
         }        
     }
     
-    public static void cargarIO(DTO objDTO, org.jsoup.nodes.Document doc){
+    public static void cargarIO(org.jsoup.nodes.Document doc){
         doc.select("io").select("name").stream().forEach((org.jsoup.nodes.Element e) -> {
-            //System.out.println(e.text());
             IO temp = new IO(e.text());
-            objDTO.listaIO.add(temp);
+            DTO.objDTO.listaIO.add(temp);
         });
     }
     
-    public static void cargarPocesos(DTO objDTO, org.jsoup.nodes.Document doc){
+    public static void cargarPocesos(org.jsoup.nodes.Document doc){
         doc.select("processes").select("process").stream().forEach((org.jsoup.nodes.Element e) -> {
             Proceso temp = new Proceso(e.select("name").text());
             String[] parts = e.select("operators").text().split(",");
@@ -53,29 +48,25 @@ public class Principal {
                 itemp.operacion = parts[i];
                 temp.listaInstrucciones.add(itemp);
             }
-            objDTO.listaProcesos.add(temp);
+            DTO.objDTO.listaProcesos.add(temp);
         });
     }
     
-    public static void cargarArchivos(DTO objDTO, org.jsoup.nodes.Document doc){
+    public static void cargarArchivos(org.jsoup.nodes.Document doc){
         doc.select("files").select("file").stream().forEach((org.jsoup.nodes.Element e) -> {
             String name = e.select("name").text();
             Double val = Double.parseDouble(e.select("value").text());
             Archivo temp = new Archivo(name,val);
-            objDTO.listaArchivos.add(temp);
+            DTO.objDTO.listaArchivos.add(temp);
         });
     }
 
-    public static DTO cargarXMLenDTO(DTO objDTO) {
-        // Aqui va lo de pasar de XML a objetos
-        
+    public static void cargarXMLenDTO(DTO objDTO) {         
         org.jsoup.nodes.Document doc = abrirArchivo();
-        cargarProcesadores(objDTO, doc);
-        cargarIO(objDTO, doc);
-        cargarPocesos(objDTO, doc);
-        cargarArchivos(objDTO, doc);
-        
-        return null;
+        cargarProcesadores(doc);
+        cargarIO(doc);
+        cargarPocesos(doc);
+        cargarArchivos(doc);
     }
 
     public static DTO verEstadoGeneral(DTO objDTO) {

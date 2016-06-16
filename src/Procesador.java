@@ -1,20 +1,14 @@
 
 public class Procesador {
+    public Proceso procesoActual;
+    public int PC;
+    public int AC = 0;
+    public Instruccion IR;
 
     public Procesador() {
     }
 
-    public static int PC;
-    public int AC;
-    public int IR;
-
     public void ejecutarUnSegundoDeProceso(DTO objDTO) {
-        // TODO implement here
+        
     }
-
-    public DTO EstadoActual(DTO objDTO) {
-        // TODO implement here
-        return null;
-    }
-
 }

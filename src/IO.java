@@ -1,12 +1,8 @@
 public class IO {   
     public String nombreIO;
-    
-    public IO() {
-        nombreIO="";
-    }
+    public Proceso procesoAsignado;
     
     public IO(String nom) {
         nombreIO = nom;
     }
-
 }

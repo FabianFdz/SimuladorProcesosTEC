@@ -25,6 +25,10 @@ public class Memoria {
             //bloquea proceso hasta que se libere memoria
         }
     }
+    
+    public static void asignaValorAMemoria(int pos, int val, Proceso proc){
+        if()
+    }
 
     public static void main(String[] args) {
         Memoria mem = new Memoria();
