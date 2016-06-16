@@ -5,4 +5,6 @@ public class IO {
     public IO(String nom) {
         nombreIO = nom;
     }
+    
+    public void asignaProc(){
 }

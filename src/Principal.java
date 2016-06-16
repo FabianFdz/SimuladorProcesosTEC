@@ -50,7 +50,7 @@ public class Principal {
             return temp;
         }
         if(lis[0].equals("Add") || lis[0].equals("Substract")){
-            Instruccion temp = new Instruccion(lis[0],Integer.parseInt(lis[1]));
+            Instruccion temp = new Instruccion(lis[0],lis[1]);
             return temp;
         }
         if(lis[0].equals("Inc") || lis[0].equals("Dec") || lis[0].equals("ShiftL") || lis[0].equals("ShiftR") || lis[0].equals("Halt")){

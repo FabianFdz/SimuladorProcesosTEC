@@ -13,18 +13,27 @@ public class Memoria {
         if (ind_dis >= 0) {
             for (int i = ind_dis; i < objProceso.tamanhoBits; i++) {
                 fisica.get(i).set(0, 1);
-                fisica.get(i).set(1, objProceso);
-                objProceso.rangosMemoria
+                fisica.get(i).set(1, objProceso);                
             }
+            objProceso.rangosMemoria.add(0, ind_dis);
+            objProceso.rangosMemoria.add(1, ind_dis+objProceso.tamanhoBits);
+            objProceso.rangosMemoria.add(2, -1);
+            objProceso.rangosMemoria.add(3, -1);
         }else if (ind_dis == -1) {
             ind_dis = verificaExisteSegmentoVirtual(objProceso);
             for (int i = ind_dis; i < objProceso.tamanhoBits; i++) {
                 virtual.get(i).set(0, 1);
                 virtual.get(i).set(1, objProceso);
             }
+            objProceso.rangosMemoria.add(0, -1);
+            objProceso.rangosMemoria.add(1, -1);
+            objProceso.rangosMemoria.add(2, ind_dis);
+            objProceso.rangosMemoria.add(3, ind_dis+objProceso.tamanhoBits);
         }else{
+            DTO.objDTO.addAccesoIlegal(objProceso);
             //bloquea proceso hasta que se libere memoria
         }
+        return objProceso;
     }   
 
     public static void main(String[] args) {
@@ -38,6 +47,8 @@ public class Memoria {
         proc2.tamanhoBits = 64;
         mem.asignaMemoria(proc);
         mem.asignaMemoria(proc2);
+        mem.asignaValor(7, 2, proc);
+        System.out.println(mem.getPosicion(2));
         System.out.println("El proximo indice disponible es: " + (mem.verificaExisteSegmentoFisica(proc) + 1));
     }
 
@@ -71,9 +82,9 @@ public class Memoria {
 
     public void asignaValor(int val, int des, Proceso proc){
         if(verificaPermanenciaEnZona(proc, des)){
-            if (proc.rangosMemoria.get(0)==null) {
+            if (proc.rangosMemoria.get(0)==-1) {
                 virtual.get(proc.rangosMemoria.get(2)+des).set(0,val);
-            }else if(proc.rangosMemoria.get(2)==null) {
+            }else if(proc.rangosMemoria.get(2)==-1) {
                 fisica.get(proc.rangosMemoria.get(2)+des).set(0,val);
             }
         }else{
@@ -84,11 +95,11 @@ public class Memoria {
 
     public boolean verificaPermanenciaEnZona(Proceso proc, int desplaza) {
         int r1_fisica = proc.rangosMemoria.get(0);
-        int r1_virtual = proc.rangosMemoria.get(2);
-        if (Objects.isNull(r1_fisica)) {
-            if (Objects.isNull(virtual.get(r1_virtual + desplaza).get(1))) {
+        //int r1_virtual = proc.rangosMemoria.get(2);
+        if (!Objects.isNull(r1_fisica)) {
+            if (Objects.isNull(fisica.get(r1_fisica + desplaza).get(1))) {
                 return false; //Ya no esta en su zona, sino en memoria disponible
-            } else if (virtual.get(r1_virtual + desplaza).equals(proc)) {
+            } else if (fisica.get(r1_fisica + desplaza).get(1).equals(proc)) {
                 return true;
             } else {
                 return false;
@@ -97,6 +108,10 @@ public class Memoria {
         return false;
     }
 
+    public Object getPosicion(int i){
+        return Integer.parseInt(this.fisica.get(i-1).get(0).toString());        
+    }
+    
     public void llenaNulo() {
         for (int i = 0; i < 1024; i++) {
             fisica.add(new ArrayList());
