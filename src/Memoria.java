@@ -104,11 +104,15 @@ public class Memoria {
             } else {
                 return false;
             }
+        }else{
+            
         }
         return false;
     }
+    
+    //remover de memoria
 
-    public Object getPosicion(int i){
+    public int getPosicion(int i){
         return Integer.parseInt(this.fisica.get(i-1).get(0).toString());        
     }
     
