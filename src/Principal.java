@@ -12,7 +12,7 @@ public class Principal {
     
     public static Document abrirArchivo(){
         try{
-            org.jsoup.nodes.Document doc = Jsoup.parse( new File("..//archivo.xml") , "utf-8" );
+            org.jsoup.nodes.Document doc = Jsoup.parse( new File("C:/Users/Fabian Fdz/Documents/GitHub/SimuladorProcesosTEC/archivo.xml") , "utf-8" );
             return doc;
         } 
         catch (IOException e){
@@ -44,7 +44,7 @@ public class Principal {
             Proceso temp = new Proceso(e.select("name").text());
             String[] parts = e.select("operators").text().split(",");
             for (int i = 0; i < parts.length; i++) {
-                Instruccion itemp = new Instruccion();
+                Instruccion itemp = new Instruccion("");
                 itemp.operacion = parts[i];
                 temp.listaInstrucciones.add(itemp);
             }
