@@ -24,7 +24,6 @@ public class Principal {
     
     public static void cargarProcesadores(org.jsoup.nodes.Document doc){
         String procText = doc.select("processors").text();
-        System.out.println(procText);
         int numProc = Integer.parseInt(procText);
         int i = 0;
         
@@ -42,15 +41,19 @@ public class Principal {
         });
     }
     
-    public static Instruccion construirInstruccion(String operacion){
-        System.out.println(operacion);
+    public static Instruccion construirInstruccion(String operacion){      
+        if (Character.isWhitespace(operacion.charAt(0))) {
+            // do something
+            operacion = operacion.substring(1);
+          }
+        
         String[] lis = operacion.split(" ");
         if(lis.length == 3){
             Instruccion temp = new Instruccion(lis[0],Integer.parseInt(lis[1]),Integer.parseInt(lis[2]));
             return temp;
         }
         if(lis[0].equals("Add") || lis[0].equals("Substract")){
-            Instruccion temp = new Instruccion(lis[0],lis[1]);
+            Instruccion temp = new Instruccion(lis[0],Integer.parseInt(lis[1]));
             return temp;
         }
         if(lis[0].equals("Inc") || lis[0].equals("Dec") || lis[0].equals("ShiftL") || lis[0].equals("ShiftR") || lis[0].equals("Halt")){

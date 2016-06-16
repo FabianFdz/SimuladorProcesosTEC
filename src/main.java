@@ -24,7 +24,6 @@ public class main {
         Principal.cargarXMLenDTO(objdto);
    
         
-        
 
     } //Cierre del main
     

@@ -1,9 +1,14 @@
 public class Instruccion {
     
-    public Instruccion(String operacion, int val, int desplazamiento) {
+    public Instruccion(String operacion, int desplazamiento, int val) {
         this.operacion = operacion;
         this.desplazamiento = desplazamiento;
         this.valor = val;
+    }
+    
+    public Instruccion(String operacion, int desplazamiento) {
+        this.operacion = operacion;
+        this.desplazamiento = desplazamiento;
     }
 
     public Instruccion(String operacion, String nombre) {
