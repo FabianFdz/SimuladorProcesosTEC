@@ -20,7 +20,7 @@ public class Principal {
         return null;
     }
     
-    public static void cargarProcesadores(DTO objDTO, org.jsoup.nodes.Document doc){
+    public static void cargarProcesadores(org.jsoup.nodes.Document doc){
         String procText = doc.select("processors").text();
         int numProc = Integer.parseInt(procText);
         int i = 0;
@@ -73,7 +73,7 @@ public class Principal {
         // TODO implement here
         return null;
     }
-
+    
     public static DTO ejecutarEnProcesadores(DTO objDTO) {
         // TODO implement here
         return null;

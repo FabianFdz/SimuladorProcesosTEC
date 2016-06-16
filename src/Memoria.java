@@ -8,12 +8,13 @@ public class Memoria {
     public ArrayList<ArrayList> fisica = new ArrayList<ArrayList>(); // -> [[val,proc],[val,proc],...]
     public ArrayList<ArrayList> virtual = new ArrayList<ArrayList>(); // -> [[val,proc],[val,proc],...]
 
-    public void asignaMemoria(Proceso objProceso) {
+    public Proceso asignaMemoria(Proceso objProceso) {
         int ind_dis = verificaExisteSegmentoFisica(objProceso);
         if (ind_dis >= 0) {
             for (int i = ind_dis; i < objProceso.tamanhoBits; i++) {
                 fisica.get(i).set(0, 1);
                 fisica.get(i).set(1, objProceso);
+                objProceso.rangosMemoria
             }
         }else if (ind_dis == -1) {
             ind_dis = verificaExisteSegmentoVirtual(objProceso);
@@ -24,20 +25,16 @@ public class Memoria {
         }else{
             //bloquea proceso hasta que se libere memoria
         }
-    }
-    
-    public static void asignaValorAMemoria(int pos, int val, Proceso proc){
-        if()
-    }
+    }   
 
     public static void main(String[] args) {
         Memoria mem = new Memoria();
         mem.llenaNulo();
         System.out.println("La memoria fisica es de " + mem.fisica.size() + " bytes.");
         System.out.println("La memoria virtual es de " + mem.virtual.size() + " bytes.");
-        Proceso proc = new Proceso();
+        Proceso proc = new Proceso("");
         proc.tamanhoBits = 32;
-        Proceso proc2 = new Proceso();
+        Proceso proc2 = new Proceso("");
         proc2.tamanhoBits = 64;
         mem.asignaMemoria(proc);
         mem.asignaMemoria(proc2);
@@ -75,9 +72,9 @@ public class Memoria {
     public void asignaValor(int val, int des, Proceso proc){
         if(verificaPermanenciaEnZona(proc, des)){
             if (proc.rangosMemoria.get(0)==null) {
-                virtual.get(proc.rangosMemoria.get(2)).set(0,val);
+                virtual.get(proc.rangosMemoria.get(2)+des).set(0,val);
             }else if(proc.rangosMemoria.get(2)==null) {
-                fisica.get(proc.rangosMemoria.get(2)).set(0,val);
+                fisica.get(proc.rangosMemoria.get(2)+des).set(0,val);
             }
         }else{
             DTO.objDTO.addAccesoIlegal(proc);
@@ -90,7 +87,7 @@ public class Memoria {
         int r1_virtual = proc.rangosMemoria.get(2);
         if (Objects.isNull(r1_fisica)) {
             if (Objects.isNull(virtual.get(r1_virtual + desplaza).get(1))) {
-                return false; //Ya no esta en su zona, sino en memoria displonible
+                return false; //Ya no esta en su zona, sino en memoria disponible
             } else if (virtual.get(r1_virtual + desplaza).equals(proc)) {
                 return true;
             } else {
