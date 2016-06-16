@@ -11,30 +11,18 @@ public class Instruccion {
 	 */
 	public Instruccion() {
 	}
-
-	/**
-	 * 
-	 */
-	public String operacion;
-
-	/**
-	 * 
-	 */
-	public int duracion;
-
-	/**
-	 * 
-	 */
-	public int desplazamiento;
-
-
-	/**
-	 * @param op 
-	 * @param dura 
-	 * @param desplaza
-	 */
-	public void Instruccion(String op, int dura, int desplaza) {
+        
+        public void Instruccion(String op) {
+            // TODO implement here
+            String operacion = op; 
+	}
+        
+        public void Instruccion(String op, int dura, int desplaza) {
 		// TODO implement here
 	}
+        
+	public String operacion;
+	public int duracion;
+	public int desplazamiento;
 
 }
