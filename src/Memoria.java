@@ -13,9 +13,10 @@ public class Memoria {
         if (ind_dis >= 0) {
             for (int i = ind_dis; i < objProceso.tamanhoBits; i++) {
                 fisica.get(i).set(0, 1);
-                fisica.get(i).set(1, objProceso);
-                objProceso.rangosMemoria
+                fisica.get(i).set(1, objProceso);                
             }
+            objProceso.rangosMemoria.add(0, ind_dis);
+            objProceso.rangosMemoria.add(1, ind_dis+objProceso.tamanhoBits);
         }else if (ind_dis == -1) {
             ind_dis = verificaExisteSegmentoVirtual(objProceso);
             for (int i = ind_dis; i < objProceso.tamanhoBits; i++) {
@@ -23,8 +24,10 @@ public class Memoria {
                 virtual.get(i).set(1, objProceso);
             }
         }else{
+            DTO.objDTO.addAccesoIlegal(objProceso);
             //bloquea proceso hasta que se libere memoria
         }
+        return objProceso;
     }   
 
     public static void main(String[] args) {
@@ -97,6 +100,10 @@ public class Memoria {
         return false;
     }
 
+    public Object getPosicion(int i){
+        return this.fisica.get(i).get(0);        
+    }
+    
     public void llenaNulo() {
         for (int i = 0; i < 1024; i++) {
             fisica.add(new ArrayList());
