@@ -12,7 +12,9 @@ public class Principal {
     
     public static Document abrirArchivo(){
         try{
-            org.jsoup.nodes.Document doc = Jsoup.parse( new File("..//archivo.xml") , "utf-8" );
+            //C:/Users/Esteban/Documents/GitHub/SimuladorProcesosTEC/archivo.xml
+            //..//archivo.xml
+            org.jsoup.nodes.Document doc = Jsoup.parse( new File("C:/Users/Esteban/Documents/GitHub/SimuladorProcesosTEC/archivo.xml") , "utf-8" );
             return doc;
         } 
         catch (IOException e){
@@ -22,6 +24,7 @@ public class Principal {
     
     public static void cargarProcesadores(org.jsoup.nodes.Document doc){
         String procText = doc.select("processors").text();
+        System.out.println(procText);
         int numProc = Integer.parseInt(procText);
         int i = 0;
         
@@ -39,13 +42,35 @@ public class Principal {
         });
     }
     
+    public static Instruccion construirInstruccion(String operacion){
+        System.out.println(operacion);
+        String[] lis = operacion.split(" ");
+        if(lis.length == 3){
+            Instruccion temp = new Instruccion(lis[0],Integer.parseInt(lis[1]),Integer.parseInt(lis[2]));
+            return temp;
+        }
+        if(lis[0].equals("Add") || lis[0].equals("Substract")){
+            Instruccion temp = new Instruccion(lis[0],Integer.parseInt(lis[1]));
+            return temp;
+        }
+        if(lis[0].equals("Inc") || lis[0].equals("Dec") || lis[0].equals("ShiftL") || lis[0].equals("ShiftR") || lis[0].equals("Halt")){
+            Instruccion temp = new Instruccion(lis[0]);
+            return temp;
+        }
+        else{
+            Instruccion temp = new Instruccion(lis[0],lis[1]);
+            return temp;
+        }
+            
+    }
+    
     public static void cargarPocesos(org.jsoup.nodes.Document doc){
         doc.select("processes").select("process").stream().forEach((org.jsoup.nodes.Element e) -> {
             Proceso temp = new Proceso(e.select("name").text());
             String[] parts = e.select("operators").text().split(",");
             for (int i = 0; i < parts.length; i++) {
-                Instruccion itemp = new Instruccion();
-                itemp.operacion = parts[i];
+                //crea instrucciones diferentes para cada tipo de instrucción
+                Instruccion itemp = construirInstruccion(parts[i]);
                 temp.listaInstrucciones.add(itemp);
             }
             DTO.objDTO.listaProcesos.add(temp);
