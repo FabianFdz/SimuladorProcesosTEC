@@ -1,0 +1,28 @@
+<simulator>
+    <processes>
+        <process>
+            <name>P1</name>
+            <operators>Readf File1, Inc,StoreD 30 10, Add 30, PrintS Print1, Halt</operators>
+        </process>
+        <process>
+            <name>P2</name>
+            <operators>Readf File4, Inc, PrintS Print1, Halt</operators>
+        </process>        
+    </processes>
+    <io>
+        <name>Print1</name>
+        <name>Print2</name>
+	<name>Print44</name>
+    </io>
+    <files>
+        <file>
+            <name>File1</name>
+            <value>5</name>
+        </file>
+	<file>
+            <name>File66</name>
+            <value>5</name>
+        </file>
+    </files>
+    <processors>2</processors>
+</simulator>
