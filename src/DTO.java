@@ -3,6 +3,8 @@ import java.util.*;
 
 public class DTO {
     
+    public static DTO objDTO = new DTO();
+    
     public DTO() {
         listaProcesos = new ArrayList<Proceso>();
         listaArchivos = new ArrayList<Archivo>();
@@ -17,8 +19,8 @@ public class DTO {
     public Memoria memoria;
     public ArrayList<Archivo> listaArchivos;
     public ArrayList<IO> listaIO;
-    public ArrayList<Proceso> bloqueo;
-    public ArrayList<Proceso> accesoIlegal;
+    public ArrayList bloqueo;
+    public ArrayList accesoIlegal; //[[segundo de bloqueo, proceso],[..,..],..]
     public ArrayList<Procesador> listaProcesadores;
     
     public ArrayList<Proceso> getListaProcesos() {
@@ -64,7 +66,7 @@ public class DTO {
     public ArrayList<Proceso> getAccesoIlegal() {
         return accesoIlegal;
     }
-    
+ 
     public void addAccesoIlegal(Proceso procesoIlegal) {
         this.accesoIlegal.add(procesoIlegal);
     }
