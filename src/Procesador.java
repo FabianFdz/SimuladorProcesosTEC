@@ -69,12 +69,12 @@ public class Procesador {
 
     public void liberaArchivosYIO() {
         for (int i = 0; i < DTO.objDTO.listaIO.size(); i++) {
-            if (DTO.objDTO.listaIO.get(i).usadoPor.equals(procesoActual)) {
+            if (DTO.objDTO.listaIO.get(i).usadoPor.nombreProceso.equals(procesoActual.nombreProceso)) {
                 DTO.objDTO.listaIO.get(i).liberaArchivo(procesoActual);
             }
         }
         for (int i = 0; i < DTO.objDTO.listaArchivos.size(); i++) {
-            if (DTO.objDTO.listaArchivos.get(i).usadoPor.equals(procesoActual)) {
+            if (DTO.objDTO.listaArchivos.get(i).usadoPor.nombreProceso.equals(procesoActual.nombreProceso)) {
                 DTO.objDTO.listaArchivos.get(i).liberaArchivo(procesoActual);
             }
         }
@@ -185,7 +185,8 @@ public class Procesador {
 
     public void WriteF() {
         for (int i = 0; i < DTO.objDTO.listaArchivos.size(); i++) {
-            if (DTO.objDTO.listaArchivos.get(i).nombreArchivo.equalsIgnoreCase(this.IR.nombre)) {
+            if (DTO.objDTO.listaArchivos.get(i).nombreArchivo.equalsIgnoreCase(this.IR.nombre) || DTO.objDTO.listaIO.get(i).usadoPor.equals(null)) {
+                DTO.objDTO.listaArchivos.get(i).usadoPor = procesoActual;
                 DTO.objDTO.listaArchivos.get(i).valor = AC;
             }
         }
