@@ -10,11 +10,11 @@ public class Principal {
     public Set<Proceso> listaProcesos;
     public Proceso lista;
     
-    public static Document abrirArchivo(){
+    public static Document abrirArchivo(String ruta){
         try{
             //C:/Users/Esteban/Documents/GitHub/SimuladorProcesosTEC/archivo.xml
             //..//archivo.xml
-            org.jsoup.nodes.Document doc = Jsoup.parse( new File("C:/Users/Esteban/Documents/GitHub/SimuladorProcesosTEC/archivo.xml") , "utf-8" );
+            org.jsoup.nodes.Document doc = Jsoup.parse( new File(ruta) , "utf-8" );
             return doc;
         } 
         catch (IOException e){
@@ -24,7 +24,9 @@ public class Principal {
     
     public static void cargarProcesadores(org.jsoup.nodes.Document doc){
         String procText = doc.select("processors").text();
-        int numProc = Integer.parseInt(procText);
+        int numProc;
+        if(procText.equals("")){numProc = 2;}
+        else{numProc = Integer.parseInt(procText);}
         int i = 0;
         
         while(i < numProc){
@@ -89,8 +91,8 @@ public class Principal {
         });
     }
 
-    public static void cargarXMLenDTO(DTO objDTO) {         
-        org.jsoup.nodes.Document doc = abrirArchivo();
+    public static void cargarXMLenDTO(String ruta) {         
+        org.jsoup.nodes.Document doc = abrirArchivo(ruta);
         cargarProcesadores(doc);
         cargarIO(doc);
         cargarPocesos(doc);
