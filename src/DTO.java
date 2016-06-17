@@ -13,14 +13,16 @@ public class DTO {
         memoria = new Memoria();
         bloqueo = new ArrayList();
         accesoIlegal = new ArrayList();
+        log = new ArrayList();
     }
     
     public ArrayList<Proceso> listaProcesos;
     public Memoria memoria;
     public ArrayList<Archivo> listaArchivos;
     public ArrayList<IO> listaIO;
-    public ArrayList bloqueo;
-    public ArrayList accesoIlegal; //[[segundo de bloqueo, proceso],[..,..],..]
+    public ArrayList<ArrayList> log; // Se almacenan los incidentes de bloqueo y acceso ilegal de esta forma [[incidente,segundo en que se dio,proceso],[...,...,...],...]
+    public ArrayList<Proceso> bloqueo; //[proceso bloqeado,..,..,..]
+    public ArrayList<Proceso> accesoIlegal; //[proceso con acceso illegal,..,..,..]
     public ArrayList<Procesador> listaProcesadores;
     
     public ArrayList<Proceso> getListaProcesos() {
