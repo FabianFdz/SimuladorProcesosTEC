@@ -67,6 +67,13 @@ public class Procesador {
         PC = null;
         procesoActual = null;
     }
+    
+    public boolean quedanInstrucciones(){
+        if(procesoActual.listaInstrucciones.size()>0){
+            return true;
+        }
+        return false;
+    }
 
     public void liberaArchivosYIO() {
         for (int i = 0; i < DTO.objDTO.listaIO.size(); i++) {
@@ -153,7 +160,7 @@ public class Procesador {
     public void PrintS() {
         for (int i = 0; i < DTO.objDTO.listaIO.size(); i++) {
             if (DTO.objDTO.listaIO.get(i).nombreIO.equalsIgnoreCase(this.IR.nombre)) {
-                if (DTO.objDTO.listaIO.get(i).usadoPor.equals(procesoActual) || DTO.objDTO.listaIO.get(i).usadoPor.equals(null)) {
+                if (DTO.objDTO.listaIO.get(i).usadoPor.equals(procesoActual) || DTO.objDTO.listaIO.get(i).usadoPor==null) {
                     DTO.objDTO.listaIO.get(i).usadoPor = procesoActual;
                     return;
                 } else {
@@ -170,7 +177,7 @@ public class Procesador {
     public void ReadF() {
         for (int i = 0; i < DTO.objDTO.listaArchivos.size(); i++) {
             if (DTO.objDTO.listaArchivos.get(i).nombreArchivo.equalsIgnoreCase(this.IR.nombre)) {
-                if (DTO.objDTO.listaArchivos.get(i).usadoPor.equals(procesoActual) || DTO.objDTO.listaIO.get(i).usadoPor.equals(null)) {
+                if (DTO.objDTO.listaArchivos.get(i).usadoPor.equals(procesoActual) || DTO.objDTO.listaArchivos.get(i).usadoPor==null) {
                     DTO.objDTO.listaArchivos.get(i).usadoPor = procesoActual;
                     this.AC = DTO.objDTO.listaArchivos.get(i).valor;
                     return;
