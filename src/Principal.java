@@ -67,30 +67,7 @@ public class Principal {
             return temp;
         }
             
-    }
-    
-    public static int determinarDuracion(Instruccion inst){
-        int duracion = 0;
-        List<String> lista1 = Arrays.asList("Load","StoreD","Store","Inc","Dec","Halt");
-        List<String> lista2 = Arrays.asList("Add","Substract","ShiftL","ShiftR");
-        List<String> lista3 = Arrays.asList("ReadF");
-        List<String> lista5 = Arrays.asList("PrintS");
-        lista1.contains("hola");
-        
-        if(lista1.contains(inst.nombre)){
-           duracion = 1;
-        }
-        if(lista2.contains(inst.nombre)){
-           duracion = 2;
-        }
-        if(lista3.contains(inst.nombre)){
-           duracion = 3;
-        }
-        if(lista5.contains(inst.nombre)){
-           duracion = 5;
-        }
-        return duracion; 
-    }
+    }        
     
     public static void cargarPocesos(org.jsoup.nodes.Document doc){
         doc.select("processes").select("process").stream().forEach((org.jsoup.nodes.Element e) -> {
@@ -99,7 +76,7 @@ public class Principal {
             for (int i = 0; i < parts.length; i++) {
                 //crea instrucciones diferentes para cada tipo de instrucción
                 Instruccion itemp = construirInstruccion(parts[i]);
-                itemp.duracion = determinarDuracion(itemp);
+                itemp.determinarDuracion();
                 temp.listaInstrucciones.add(itemp);
             }
             DTO.objDTO.listaProcesos.add(temp);
@@ -109,7 +86,7 @@ public class Principal {
     public static void cargarArchivos(org.jsoup.nodes.Document doc){
         doc.select("files").select("file").stream().forEach((org.jsoup.nodes.Element e) -> {
             String name = e.select("name").text();
-            Double val = Double.parseDouble(e.select("value").text());
+            int val = Integer.parseInt(e.select("value").text());
             Archivo temp = new Archivo(name,val);
             DTO.objDTO.listaArchivos.add(temp);
         });
@@ -122,19 +99,19 @@ public class Principal {
         cargarPocesos(doc);
         cargarArchivos(doc);
     }
-
-    public static DTO verEstadoGeneral(DTO objDTO) {
-        // TODO implement here
-        return null;
-    }
     
-    public static DTO ejecutarEnProcesadores(DTO objDTO) {
-        // TODO implement here
-        return null;
-    }
-
-    public static DTO crearEntorno(DTO objDTO) {
-        // TODO implement here
-        return null;
+    public static void ejecutarProcesadores(){
+        while(DTO.objDTO.listaProcesos.size()>0){
+            for (int i = 0; i < DTO.objDTO.listaProcesadores.size(); i++) {
+                if(DTO.objDTO.listaProcesos.size()>0){
+                    DTO.objDTO.listaProcesadores.get(i).cogerProcesoDeCola();
+                    DTO.objDTO.listaProcesadores.get(i).ejecutarUnSegundoDeProceso();
+                }else{
+                    return;
+                }
+            }
+            //Aqui va metodo para actualizar vista
+            //Aqui se pone lo de esperar un segundo
+        }
     }
 }

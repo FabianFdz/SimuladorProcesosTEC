@@ -133,7 +133,7 @@ public class Memoria {
                 objMem.set(1, null);
             }
         }
-    }
+    }    
 
     public int getPosicion(int i) {
         return Integer.parseInt(this.fisica.get(i - 1).get(0).toString());
