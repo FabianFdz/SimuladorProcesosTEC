@@ -21,7 +21,7 @@ public class main {
         
         DTO objdto = new DTO();
         
-        Principal.cargarXMLenDTO(objdto);
+        Principal.cargarXMLenDTO("C:/Users/Esteban/Documents/GitHub/SimuladorProcesosTEC/archivo.xml");
    
         
 
