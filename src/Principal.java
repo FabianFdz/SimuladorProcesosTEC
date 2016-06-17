@@ -115,10 +115,9 @@ public class Principal {
         for (int i = 0; i < DTO.objDTO.listaProcesadores.size(); i++) {
             if (DTO.objDTO.listaProcesos.size() > 0) {
                 DTO.objDTO.listaProcesadores.get(i).cogerProcesoDeCola();
-                DTO.objDTO.listaProcesadores.get(i).ejecutarUnSegundoDeProceso();
             }
         }
-        while (true) {
+        while (!todaviaInstrucciones()) {
             for (int i = 0; i < DTO.objDTO.listaProcesadores.size(); i++) {
                 if (DTO.objDTO.listaProcesadores.get(i).procesoActual.listaInstrucciones.size() > 0) {
                     DTO.objDTO.listaProcesadores.get(i).ejecutarUnSegundoDeProceso();
@@ -128,9 +127,6 @@ public class Principal {
                 }
             }
             //Aqui va metodo para actualizar vista
-            if (!todaviaInstrucciones()) {
-                return;
-            }
             //Aqui se pone lo de esperar un segundo
         }
     }

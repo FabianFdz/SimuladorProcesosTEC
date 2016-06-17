@@ -37,6 +37,7 @@ public class Procesador {
             } else if (procesoActual.listaInstrucciones.size() == 1) {
                 DTO.objDTO.memoria.removerProcesoMemoria(procesoActual);
                 IR = procesoActual.listaInstrucciones.remove(0);
+                PC = null;
                 DTO.objDTO.memoria.asignaMemoria(procesoActual);
                 this.ejecutaOperacion();
             } else {
