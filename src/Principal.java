@@ -67,6 +67,29 @@ public class Principal {
             
     }
     
+    public static int determinarDuracion(Instruccion inst){
+        int duracion = 0;
+        List<String> lista1 = Arrays.asList("Load","StoreD","Store","Inc","Dec","Halt");
+        List<String> lista2 = Arrays.asList("Add","Substract","ShiftL","ShiftR");
+        List<String> lista3 = Arrays.asList("ReadF");
+        List<String> lista5 = Arrays.asList("PrintS");
+        lista1.contains("hola");
+        
+        if(lista1.contains(inst.nombre)){
+           duracion = 1;
+        }
+        if(lista2.contains(inst.nombre)){
+           duracion = 2;
+        }
+        if(lista3.contains(inst.nombre)){
+           duracion = 3;
+        }
+        if(lista5.contains(inst.nombre)){
+           duracion = 5;
+        }
+        return duracion; 
+    }
+    
     public static void cargarPocesos(org.jsoup.nodes.Document doc){
         doc.select("processes").select("process").stream().forEach((org.jsoup.nodes.Element e) -> {
             Proceso temp = new Proceso(e.select("name").text());
@@ -74,6 +97,7 @@ public class Principal {
             for (int i = 0; i < parts.length; i++) {
                 //crea instrucciones diferentes para cada tipo de instrucción
                 Instruccion itemp = construirInstruccion(parts[i]);
+                itemp.duracion = determinarDuracion(itemp);
                 temp.listaInstrucciones.add(itemp);
             }
             DTO.objDTO.listaProcesos.add(temp);
