@@ -1,6 +1,7 @@
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -156,6 +157,7 @@ public class Procesador {
                     DTO.objDTO.listaIO.get(i).usadoPor = procesoActual;
                     return;
                 } else {
+                    DTO.objDTO.log.add(new ArrayList());
                     DTO.objDTO.log.get(DTO.objDTO.log.size() - 1).add("Bloqueo");
                     DTO.objDTO.log.get(DTO.objDTO.log.size() - 1).add(procesoActual.tiempoEjecucion);
                     DTO.objDTO.log.get(DTO.objDTO.log.size() - 1).add(procesoActual);
@@ -173,6 +175,7 @@ public class Procesador {
                     this.AC = DTO.objDTO.listaArchivos.get(i).valor;
                     return;
                 } else {
+                    DTO.objDTO.log.add(new ArrayList());
                     DTO.objDTO.log.get(DTO.objDTO.log.size() - 1).add("Bloqueo");
                     DTO.objDTO.log.get(DTO.objDTO.log.size() - 1).add(procesoActual.tiempoEjecucion);
                     DTO.objDTO.log.get(DTO.objDTO.log.size() - 1).add(procesoActual);

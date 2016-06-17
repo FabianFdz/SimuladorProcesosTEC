@@ -91,6 +91,7 @@ public class Memoria {
             }
         } else {
             DTO.objDTO.addAccesoIlegal(proc);
+            DTO.objDTO.log.add(new ArrayList());
             DTO.objDTO.log.get(DTO.objDTO.log.size() - 1).add("Acceso Ilegal");
             DTO.objDTO.log.get(DTO.objDTO.log.size() - 1).add(proc.tiempoEjecucion);
             DTO.objDTO.log.get(DTO.objDTO.log.size() - 1).add(proc);
